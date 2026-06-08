@@ -1,0 +1,205 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "maple",
+  "name": "Superserve",
+  "colors": {
+    "primary": "#B2FAB4",
+    "light": "#B2FAB4",
+    "dark": "#B2FAB4"
+  },
+  "fonts": {
+    "heading": {
+      "family": "Instrument Sans"
+    },
+    "body": {
+      "family": "Instrument Sans"
+    }
+  },
+  "background": {
+    "color": {
+      "dark": "#141414"
+    },
+    "decoration": "gradient"
+  },
+  "styling": {
+    "codeblocks": {
+      "theme": {
+        "light": "github-light",
+        "dark": "vitesse-dark"
+      }
+    }
+  },
+  "favicon": "/favicon.svg",
+  "logo": "/logo.svg",
+  "appearance": {
+    "default": "dark",
+    "strict": true
+  },
+  "navbar": {
+    "primary": {
+      "type": "github",
+      "href": "https://github.com/superserve-ai/superserve"
+    }
+  },
+  "contextual": {
+    "options": ["copy", "view", "chatgpt", "claude"]
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": ["introduction", "quickstart", "api-key"]
+          },
+          {
+            "group": "Sandbox",
+            "pages": [
+              "sandbox/create",
+              "sandbox/connect",
+              "sandbox/lifecycle",
+              "sandbox/metadata",
+              "sandbox/networking",
+              "sandbox/environment-variables"
+            ]
+          },
+          {
+            "group": "Templates",
+            "pages": [
+              "templates/overview",
+              "templates/create",
+              "templates/lifecycle",
+              "templates/build-spec"
+            ]
+          },
+          {
+            "group": "Commands",
+            "pages": [
+              "commands/overview",
+              "commands/streaming",
+              "commands/sessions"
+            ]
+          },
+          {
+            "group": "Filesystem",
+            "pages": ["filesystem/read-write"]
+          },
+          {
+            "group": "Errors",
+            "pages": ["errors"]
+          }
+        ]
+      },
+      {
+        "tab": "SDK Reference",
+        "groups": [
+          {
+            "group": "Reference",
+            "pages": [
+              "sdk-reference/sandbox",
+              "sdk-reference/template",
+              "sdk-reference/commands",
+              "sdk-reference/files"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Integration Guides",
+        "groups": [
+          {
+            "group": "Coding Agents",
+            "pages": [
+              "integrations/coding-agents/claude",
+              "integrations/coding-agents/codex",
+              "integrations/coding-agents/opencode",
+              "integrations/coding-agents/kilocode"
+            ]
+          },
+          {
+            "group": "Personal Agents",
+            "pages": [
+              "integrations/personal-agents/openclaw",
+              "integrations/personal-agents/hermes"
+            ]
+          },
+          {
+            "group": "Managed Agents",
+            "pages": ["integrations/managed-agents/claude-managed-agents"]
+          },
+          {
+            "group": "Agent Harnesses",
+            "pages": [
+              "integrations/agent-harnesses/claude-agent-sdk",
+              "integrations/agent-harnesses/openai-agents-sdk"
+            ]
+          },
+          {
+            "group": "Virtual Filesystems",
+            "pages": ["integrations/virtual-filesystems/mesa"]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "openapi": "https://raw.githubusercontent.com/superserve-ai/sandbox/refs/heads/main/api/openapi.yaml",
+        "groups": [
+          {
+            "group": "Sandboxes",
+            "pages": [
+              "GET /sandboxes",
+              "POST /sandboxes",
+              "GET /sandboxes/{sandbox_id}",
+              "PATCH /sandboxes/{sandbox_id}",
+              "DELETE /sandboxes/{sandbox_id}",
+              "POST /sandboxes/{sandbox_id}/pause",
+              "POST /sandboxes/{sandbox_id}/resume",
+              "POST /sandboxes/{sandbox_id}/activate"
+            ]
+          },
+          {
+            "group": "Exec",
+            "pages": [
+              "GET /exec/connect",
+              "POST /sandboxes/{sandbox_id}/exec",
+              "POST /sandboxes/{sandbox_id}/exec/stream",
+              "GET /exec/connect"
+            ]
+          },
+          {
+            "group": "Files",
+            "pages": ["GET /files", "POST /files"]
+          },
+          {
+            "group": "Templates",
+            "pages": [
+              "GET /templates",
+              "POST /templates",
+              "GET /templates/{template_id}",
+              "DELETE /templates/{template_id}",
+              "GET /templates/{template_id}/builds",
+              "POST /templates/{template_id}/builds",
+              "GET /templates/{template_id}/builds/{build_id}",
+              "DELETE /templates/{template_id}/builds/{build_id}",
+              "GET /templates/{template_id}/builds/{build_id}/logs"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "footer": {
+    "socials": {
+      "x": "https://x.com/superserve_ai",
+      "github": "https://github.com/superserve-ai/",
+      "linkedin": "https://www.linkedin.com/company/super-serve-ai/"
+    }
+  },
+  "integrations": {
+    "posthog": {
+      "apiKey": "phc_gjpDKKQJAnkxkqLrPGrAhoariKsaHNuTpI5rVhkYre",
+      "apiHost": "https://us.i.posthog.com"
+    }
+  }
+}

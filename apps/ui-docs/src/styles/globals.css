@@ -1,0 +1,27 @@
+@import "@superserve/ui/styles";
+@source "../../../../packages/ui/src";
+
+:root {
+  --sans-font: "Instrument Sans", system-ui, -apple-system, sans-serif;
+  --mono-font: "Geist Mono", ui-monospace, monospace;
+}
+
+/* Scrollbar — WebKit */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #404040;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #525252;
+}
+
+/* Scrollbar — Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #404040 transparent;
+}

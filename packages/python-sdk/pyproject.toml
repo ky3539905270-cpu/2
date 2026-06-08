@@ -1,0 +1,55 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "superserve"
+version = "0.7.4"
+description = "Python SDK for the Superserve sandbox API"
+license = "Apache-2.0"
+readme = "README.md"
+requires-python = ">=3.9"
+keywords = ["superserve", "sandbox", "firecracker", "microvm", "sdk"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "httpx>=0.24.0",
+    "pydantic>=2.0.0",
+    "typing-extensions>=4.0.0",
+    "websockets>=12.0",
+]
+
+[project.urls]
+Homepage = "https://superserve.ai?utm_source=pypi&utm_medium=package_meta"
+Repository = "https://github.com/superserve-ai/superserve"
+Issues = "https://github.com/superserve-ai/superserve/issues"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+    "respx>=0.21",
+    "ruff>=0.8",
+    "mypy>=1.11",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.ruff]
+# Match the package's Python floor so Ruff doesn't suggest 3.11+ APIs (e.g. datetime.UTC).
+target-version = "py39"
+line-length = 88
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/superserve"]

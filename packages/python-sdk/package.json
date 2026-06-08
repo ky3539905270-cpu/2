@@ -1,0 +1,11 @@
+{
+  "name": "@superserve/python-sdk",
+  "version": "0.6.0",
+  "private": true,
+  "scripts": {
+    "build": "uv build --package superserve",
+    "test": "uv run pytest tests/",
+    "lint": "uv run ruff check src/ tests/",
+    "typecheck": "uv run mypy src/superserve/"
+  }
+}

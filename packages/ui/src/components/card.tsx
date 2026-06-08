@@ -1,0 +1,58 @@
+import { cn } from "../lib/utils"
+
+function Card({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return (
+    <div
+      className={cn("border border-dashed border-border bg-surface", className)}
+      {...props}
+    />
+  )
+}
+
+function CardHeader({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn("p-5 pb-0", className)} {...props} />
+}
+
+function CardTitle({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLHeadingElement>) {
+  return (
+    // oxlint-disable-next-line jsx-a11y/heading-has-content -- children passed via {...props}
+    <h3
+      className={cn("text-base font-semibold text-foreground", className)}
+      {...props}
+    />
+  )
+}
+
+function CardDescription({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLParagraphElement>) {
+  return <p className={cn("mt-1 text-sm text-muted", className)} {...props} />
+}
+
+function CardContent({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn("p-5", className)} {...props} />
+}
+
+function CardFooter({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
+  return (
+    <div
+      className={cn("flex items-center gap-3 p-5 pt-0", className)}
+      {...props}
+    />
+  )
+}
+
+export { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }

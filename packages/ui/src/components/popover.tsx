@@ -1,0 +1,32 @@
+"use client"
+
+import { Popover as PopoverPrimitive } from "@base-ui/react/popover"
+
+import { cn } from "../lib/utils"
+
+const Popover = PopoverPrimitive.Root
+const PopoverTrigger = PopoverPrimitive.Trigger
+
+function PopoverPopup({
+  className,
+  sideOffset = 4,
+  ...props
+}: React.ComponentProps<typeof PopoverPrimitive.Popup> & {
+  sideOffset?: number
+}) {
+  return (
+    <PopoverPrimitive.Portal>
+      <PopoverPrimitive.Positioner sideOffset={sideOffset} className="z-50">
+        <PopoverPrimitive.Popup
+          className={cn(
+            "ss-popover-popup min-w-[8rem] overflow-hidden border border-dashed border-border bg-surface/80 p-4 backdrop-blur-xl",
+            className,
+          )}
+          {...props}
+        />
+      </PopoverPrimitive.Positioner>
+    </PopoverPrimitive.Portal>
+  )
+}
+
+export { Popover, PopoverPopup, PopoverTrigger }

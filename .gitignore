@@ -1,0 +1,55 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+.next/
+*.egg-info/
+
+# Python
+__pycache__/
+*.py[cod]
+.Python
+*.egg
+.installed.cfg
+
+# Virtual environments
+.venv/
+
+# Environment files
+.env
+.env.local
+.env.release
+
+# Test / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDEs
+.idea/
+*.swp
+
+# OS
+.DS_Store
+
+# Turbo
+.turbo/
+
+# Vercel
+.vercel/
+
+# Vite
+.vite/
+
+# Development
+notes/
+blog_draft*.md
+
+# Claude
+.claude/
+devcontainer.json
+.agents/
+
+# Visual brainstorming companion
+.superpowers/

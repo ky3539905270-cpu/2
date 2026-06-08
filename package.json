@@ -1,0 +1,58 @@
+{
+  "name": "superserve",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "tests/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "turbo run format",
+    "format:check": "turbo run format:check",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "test:coverage": "turbo run test:coverage",
+    "test:e2e": "turbo run e2e",
+    "docs:dev": "mintlify dev --dir docs",
+    "docs:build": "mintlify build --dir docs",
+    "docs:check-nav": "bun run scripts/check-docs-nav.ts",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "@react-email/components": "^1.0.11",
+    "@supabase/ssr": "^0.10.0",
+    "@supabase/supabase-js": "^2.101.1",
+    "@tailwindcss/postcss": "^4.2.2",
+    "@types/node": "^25.5.2",
+    "@vitejs/plugin-react": "^5.1.4",
+    "cmdk": "^1.1.1",
+    "happy-dom": "^20.8.9",
+    "next": "^16.2.2",
+    "postcss": "^8.5.8",
+    "posthog-js": "^1.364.7",
+    "posthog-node": "^5.28.11",
+    "resend": "^6.10.0",
+    "tailwindcss": "^4.2.2",
+    "vitest": "^4.1.2"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "mintlify": "^4.0.0",
+    "oxfmt": "0.49.0",
+    "oxlint": "1.64.0",
+    "turbo": "^2.9.4"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "bunx oxlint --fix"
+    ],
+    "*.{ts,tsx,js,jsx,json,jsonc,md,css,yaml,yml}": [
+      "bunx oxfmt --write"
+    ]
+  },
+  "packageManager": "bun@1.3.5"
+}

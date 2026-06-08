@@ -1,0 +1,147 @@
+/**
+ * Typed error hierarchy for the Superserve SDK.
+ *
+ * Maps HTTP status codes to specific error classes so users can catch
+ * granular errors without inspecting status codes.
+ */
+
+export class SandboxError extends Error {
+  readonly statusCode?: number
+  readonly code?: string
+
+  constructor(
+    message: string,
+    statusCode?: number,
+    code?: string,
+    options?: { cause?: unknown },
+  ) {
+    super(message)
+    this.name = "SandboxError"
+    this.statusCode = statusCode
+    this.code = code
+    if (options?.cause !== undefined) {
+      // ES2022 `cause` — set directly to avoid requiring lib >= ES2022
+      ;(this as { cause?: unknown }).cause = options.cause
+    }
+  }
+}
+
+export class AuthenticationError extends SandboxError {
+  constructor(
+    message = "Missing or invalid API key",
+    code?: string,
+    statusCode = 401,
+  ) {
+    super(message, statusCode, code)
+    this.name = "AuthenticationError"
+  }
+}
+
+export class ValidationError extends SandboxError {
+  constructor(message: string, code?: string) {
+    super(message, 400, code)
+    this.name = "ValidationError"
+  }
+}
+
+export class NotFoundError extends SandboxError {
+  constructor(message = "Resource not found", code?: string) {
+    super(message, 404, code)
+    this.name = "NotFoundError"
+  }
+}
+
+export class ConflictError extends SandboxError {
+  constructor(
+    message = "Sandbox is not in a valid state for this operation",
+    code?: string,
+  ) {
+    super(message, 409, code)
+    this.name = "ConflictError"
+  }
+}
+
+export class TimeoutError extends SandboxError {
+  constructor(message = "Request timed out") {
+    super(message)
+    this.name = "TimeoutError"
+  }
+}
+
+/**
+ * 429 from the API. `code` distinguishes the variant:
+ * - `rate_limited` — request rate exceeded; retry after a short backoff.
+ * - `too_many_builds` — team has reached its concurrent build limit.
+ * - `too_many_templates` — team has reached its total template count limit.
+ * - `too_many_sandboxes` — team has reached its active sandbox count limit.
+ */
+export class RateLimitError extends SandboxError {
+  constructor(message = "Rate limit exceeded", code?: string) {
+    super(message, 429, code)
+    this.name = "RateLimitError"
+  }
+}
+
+export class ServerError extends SandboxError {
+  constructor(message = "Internal server error", code?: string) {
+    super(message, 500, code)
+    this.name = "ServerError"
+  }
+}
+
+/**
+ * Thrown by `Template.waitUntilReady()` when the awaited build lands on
+ * status `failed`. `code` is the stable error prefix on the `error_message`
+ * field — e.g. `image_pull_failed`, `step_failed`, `boot_failed`,
+ * `snapshot_failed`, `start_cmd_failed`, `ready_cmd_failed`, `build_failed`.
+ */
+export class BuildError extends SandboxError {
+  readonly code: string
+  readonly buildId: string
+  readonly templateId: string
+
+  constructor(
+    message: string,
+    opts: {
+      code: string
+      buildId: string
+      templateId: string
+      statusCode?: number
+    },
+  ) {
+    super(message, opts.statusCode, opts.code)
+    this.name = "BuildError"
+    this.code = opts.code
+    this.buildId = opts.buildId
+    this.templateId = opts.templateId
+  }
+}
+
+/**
+ * Map an HTTP status code and response body to a typed error.
+ * @internal
+ */
+export function mapApiError(
+  status: number,
+  body: { error?: { code?: string; message?: string } },
+): SandboxError {
+  const message = body?.error?.message ?? `API error (${status})`
+  const code = body?.error?.code
+
+  switch (status) {
+    case 400:
+      return new ValidationError(message, code)
+    case 401:
+    case 403:
+      return new AuthenticationError(message, code, status)
+    case 404:
+      return new NotFoundError(message, code)
+    case 409:
+      return new ConflictError(message, code)
+    case 429:
+      return new RateLimitError(message, code)
+    default:
+      if (status >= 500) return new ServerError(message, code)
+      return new SandboxError(message, status, code)
+  }
+}
